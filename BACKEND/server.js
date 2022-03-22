@@ -31,7 +31,7 @@ connection.once('open', () => {
 
 //Access to router file
  
-const employeeRouter = require("./routes/Employee.js");
+const employeeRouter = require("./routes/Employee.route.js");
 
 const machineRouter = require("./routes/Machine.route.js");
 
