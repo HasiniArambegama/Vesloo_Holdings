@@ -32,13 +32,14 @@ connection.once('open', () => {
 //Access to router employee file
  
 const employeeRouter = require("./routes/Employee.js");
+const supplierRouter = require("./routes/Supplier.route.js");
 
 //http://localhost:8070 -backend url
 
 http://localhost:8070/employee
 
 app.use("/Employee", employeeRouter);
-
+app.use("/Supplier", supplierRouter);
 
 
 //run in declared port
