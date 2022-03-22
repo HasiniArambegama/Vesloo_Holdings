@@ -39,6 +39,8 @@ http://localhost:8070/employee
 
 app.use("/Employee", employeeRouter);
 
+ const stockRouter = require("./routes/Stock.route.js");
+ app.use("/Stock",stockRouter );
 
 
 //run in declared port
