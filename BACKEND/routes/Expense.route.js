@@ -1,31 +1,33 @@
 const router = require("express").Router();
 const res = require("express/lib/response");
-let Machine = require("../models/Machine.model");
+let Expense = require("../models/Expense.model");
 
 router.route("/add").post((req, res)=>{
-    const machineName = req.body.machineName;
-    const machineModelNumber = req.body.machineModelNumber;
-    const machineDepartment = req.body.machineDepartment;
-    const machineSerialNumber = req.body.machineSerialNumber;
-    const machineDate = req.body. machineDate;
-    const newMachine = new Machine({
-        machineName,
-        machineModelNumber,
-        machineDepartment,
-        machineSerialNumber,
-        machineDate
+    const department = req.body.department;
+    const expenseMachineName = req.body.expenseMachineName;
+    const expenseMachineSerialNumber = req.body.expenseMachineSerialNumber;
+    const expenseType = req.body.expenseType;
+    const expenseDate = req.body. expenseDate;
+    const expenseAmount = req.body. expenseAmount;
+    const newExpense = new Expense({
+        department,
+        expenseMachineName,
+        expenseMachineSerialNumber,
+        expenseType,
+        expenseDate,
+        expenseAmount
     })
 
-    newMachine.save().then(()=>{
-        res.json("Machine Added")
+    newExpense.save().then(()=>{
+        res.json("Expense Added")
     }).catch((err)=>{
         console.log(err);
     })
 
 })
 router.route("/").get((req, res)=>{
-    Machine.find().then((machine)=>{
-        res.json(machine)
+    Expense.find().then((expense)=>{
+        res.json(expense)
     }).catch((err)=> {
         console.log(err)
     })
@@ -40,28 +42,31 @@ router.route("/update").post(async(req, res)=>{
         return;
     }
 
-    const {machineName, machineModelNumber, machineDepartment, machineSerialNumber, machineDate} = req.body;
+    const {department, expenseMachineName, expenseMachineSerialNumber, expenseType, machineDate, expenseAmount} = req.body;
     console.log(req.body);
     
-     Machine.findOne({_id : req.body.id }, (err, foundBul) => {
+    Expense.findOne({_id : req.body.id }, (err, foundBul) => {
         if(err) return res.status(401).send(err);
 
         if(!foundBul) return res.status(404).send("Building not found");
 
-        if(machineName){
-            foundBul.machineName = req.body.machineName;
+        if(department){
+            foundBul.department = req.body.department;
         }
-        if(machineModelNumber){
-            foundBul.machineModelNumber = req.body.machineModelNumber;
+        if(expenseMachineName){
+            foundBul.expenseMachineName = req.body.expenseMachineName;
         }
-        if(machineDepartment){
-            foundBul.machineDepartment = req.body.machineDepartment;
+        if(expenseMachineSerialNumber){
+            foundBul.expenseMachineSerialNumber = req.body.expenseMachineSerialNumber;
         }
-        if(machineSerialNumber){
-            foundBul.machineSerialNumber = req.body.machineSerialNumber;
+        if(expenseType){
+            foundBul.expenseType = req.body.expenseType;
         }
         if(machineDate){
             foundBul.machineDate = req.body.machineDate;
+        }
+        if(expenseAmount){
+            foundBul.expenseAmount = req.body.expenseAmount;
         }
 
         foundBul.save((err, savedBul) => {
@@ -84,7 +89,7 @@ router.route("/update").post(async(req, res)=>{
         return;
     }
     
-    Machine.findOneAndDelete({ _id: req.params.id })
+    Expense.findOneAndDelete({ _id: req.params.id })
     .then( result => {
 
         if (!result) {
@@ -107,7 +112,7 @@ router.route("/update").post(async(req, res)=>{
 router.route("/getOne/:id").get(async(req, res)=> {
    
     try {
-        const build = await Machine.findOne({ _id: req.params.id });
+        const build = await Expense.findOne({ _id: req.params.id });
         return res.status(200).send({
             data: build
         })
@@ -117,6 +122,19 @@ router.route("/getOne/:id").get(async(req, res)=> {
             error: error
         })
     }
+})
+
+router.route("/getByDate/:date").get(async(req, res)=> {
+   
+
+
+    Expense.find({ expenseDate: req.params.date }).then((expense)=>{
+        res.json(expense)
+    }).catch((err)=> {
+        console.log(err)
+    })
+
+    
 })
 
 

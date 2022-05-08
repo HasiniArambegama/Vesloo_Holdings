@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const res = require("express/lib/response");
-let Employee = require("../models/Employee");
+let Employee = require("../models/Employee.model");
 
 //Insert employee details
 
@@ -15,7 +15,7 @@ router.route("/add").post((req, res)=>{
     const email = req.body. email;
     const address = req.body.address; 
     const accountNumber = req.body.accountNumber;
-    const empType = req.body.empType;
+    const empType = req.body.empType
 
      //create a object of model
     const newEmployee = new Employee({

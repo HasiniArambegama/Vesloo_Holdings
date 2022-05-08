@@ -31,12 +31,13 @@ connection.once('open', () => {
 
 //Access to router file
  
-const employeeRouter = require("./routes/Employee.js");
+const employeeRouter = require("./routes/Employee.route.js");
 
 const machineRouter = require("./routes/Machine.route.js");
 
 const supplierRouter = require("./routes/Supplier.route.js");
 
+const expenseRouter = require("./routes/Expense.route");
 
 //http://localhost:8070 -backend url
 
@@ -46,9 +47,9 @@ app.use("/Employee", employeeRouter);
 
 app.use("/Machine", machineRouter);
 
-
 app.use("/Supplier", supplierRouter);
 
+app.use("/Expense", expenseRouter);
 
  const stockRouter = require("./routes/Stock.route.js");
  app.use("/Stock",stockRouter );
