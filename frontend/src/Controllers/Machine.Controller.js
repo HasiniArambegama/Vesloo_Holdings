@@ -150,7 +150,11 @@ class Machine {
         var resp = 600;
         var userData = {}
         await Axios.delete(
+
             `${Config.host}${Config.port}${this.api.deleteMachine}/${data.id}`,
+
+            `${Config.host}${Config.port}${this.api.deleteMachinet}/${data.id}`,
+
         )
             .then(Response => {
                 console.log(Response);

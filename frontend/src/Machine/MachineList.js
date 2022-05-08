@@ -35,7 +35,10 @@ class MachineList extends React.Component {
 
   render(){
       const {machineList} = this.state;
+
       console.log("expenseList: ", machineList);
+
+
   return (
     <div className="app" >
     <Sidebar activemenu={'MACHINE'} submenu={'MACHINE_LIST'} />

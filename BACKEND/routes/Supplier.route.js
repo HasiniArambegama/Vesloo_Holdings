@@ -53,39 +53,109 @@ router.route("/").get((req, res)=>{
 
 http://localhost:8070/Supplier/update/
 
-router.route("/update/:id").put(async(req, res)=>{
-    let supID = req.params.id;  //fetch the backend url id
-    //Destructure in js
-    const {supplierID, modelID , Squantity,Samount,Sdate,CreditPeriod} = req.body;
-
-    const updateSupplier = {
-        supplierID,
-        modelID ,
-        Squantity,
-        Samount,
-        Sdate,
-        CreditPeriod
+router.route("/update").post(async(req, res)=>{
+    if (req.body.id == null || req.body.id == undefined) {
+        res.status(400).send({
+            message: "ID can not be empty!"
+        });
+        return;
     }
+
+    const {supplierID, modelID,Squantity,Samount, Sdate,CreditPeriod} = req.body;
+    console.log(req.body);
     
-    const update = await Supplier.findByIdAndUpdate(supID,updateSupplier).then(()=> {
-        res.status(200).send({status: "Supplier Updated"})
-    }).catch((err)=> {
-        console.log(err)
-        res.status(500).send({status: "Error with updating data", error: err(message) })
-    })
+    Supplier.findOne({_id : req.body.id }, (err, foundBul) => {
+        if(err) return res.status(401).send(err);
+
+        if(!foundBul) return res.status(404).send("Building not found");
+
+        if(supplierID){
+            foundBul.supplierID = req.body.supplierID;
+        }
+        if(modelID){
+            foundBul.modelID = req.body.modelID;
+        }
+        if(Squantity){
+            foundBul.Squantity = req.body.Squantity;
+        }
+        if(Samount){
+            foundBul.Samount = req.body.Samount;
+        }
+        if(Sdate){
+            foundBul.Sdate = req.body.Sdate;
+        }
+        if(CreditPeriod){
+            foundBul.supplierAmount = req.body.CreditPeriod;
+        }
+
+        foundBul.save((err, savedBul) => {
+            if(err) return res.status(401).send(err);
+
+            if(!savedBul) return res.status(404).send("Not saved");
+
+            return res.status(200).send(savedBul);
+        });
+    });
 })
+
  //Delete Supplier
  
  http://localhost:8070/Supplier
  router.route("/delete/:id").delete(async(req, res)=> {
-     let supID = req.params.id;
-     await Supplier.findByIdAndDelete(supID).then(()=>{
-         res.status(200).send({status: "Supplier deleted"})
-     }).catch((err)=> {
-        console.log(err.message)
-        res.status(500).send({status: "Error with updating data", error: err(message)})
+    console.log(req.params.id);
+    
+    if (req.params.id == null || req.params.id == undefined) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+    
+    Supplier.findOneAndDelete({ _id: req.params.id })
+    .then( result => {
+
+        if (!result) {
+            throw new Error('No record found')
+        }
+
+        res.status(200).send({
+            message: "Deleted successfully"
+        });
+    
     })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while deleting the data."
+        });
+    });   
  })
+ router.route("/getOne/:id").get(async(req, res)=> {
+   
+    try {
+        const build = await Supplier.findOne({ _id: req.params.id });
+        return res.status(200).send({
+            data: build
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(401).send({
+            error: error
+        })
+    }
+})
+router.route("/getByDate/:date").get(async(req, res)=> {
+   
+
+
+    Expense.find({ expenseDate: req.params.date }).then((expense)=>{
+        res.json(expense)
+    }).catch((err)=> {
+        console.log(err)
+    })
+
+    
+})
 
  http://localhost:8070/Supplier
 router.route("/get/:id").get(async(req, res)=> {
