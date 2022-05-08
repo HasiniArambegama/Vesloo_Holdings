@@ -33,6 +33,23 @@ import ManageEmployee from '../Employee/ManageEmployees';
 import PaymentReport from '../Supplier/PaymentReport';
 import  SelectDate from '../Supplier/SelectDate';
 
+import AddEmployee from '../Employee/AddEmployee';
+
+import ManageEmployee from '../Employee/ManageEmployees';
+
+import EditEmployee from '../Employee/EditEmployee';
+
+import AddAttendance from '../Employee/AddAttendance';
+
+import DeleteEmployee from '../Employee/DeleteEmployee';
+
+import BasicInformation from '../Employee/BasicInformation';
+
+import SalaryReport from '../Employee/SalaryReport';
+
+import AttendanceDetails from '../Employee/AttendanceDetails'
+
+import view from '../Employee/view'
 
 
 let routes = [
@@ -50,7 +67,7 @@ let routes = [
     name: "Add Expense",
     component: AddExpense,
 
-
+  },
 
   {
     path: "/Stock/list",
@@ -78,7 +95,8 @@ let routes = [
     path: "/Expense/report/:date",
     name: "Expense Report",
     component: ExpenseReport,
-
+  },
+  {
 
     path: "/Stock/add",
     name: "Add Stock",
@@ -296,14 +314,137 @@ let routes = [
     component: ManageEmployee,
     exact: true,
   },
+  {
+
+    path: "/Employee/add",
+
+    name: "Add Employee",
+
+    component: AddEmployee,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/list",
+
+    name: "Manage Employee",
+
+    component: ManageEmployee,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/update/:id",
+
+    name: "Edit Employee",
+
+    component: EditEmployee,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/att/:id",
+
+    name: "Add Attendance",
+
+    component: AddAttendance,
+
+    exact: true,
+
+  },
+
+
+
  
+
+  {
+
+    path: "/Employee/delete/:id",
+
+    name: "Delete Employee",
+
+    component: DeleteEmployee,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/blist",
+
+    name: "Employee Basic Information",
+
+    component: BasicInformation,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/salaryreport",
+
+    name: "Employee Salary Details",
+
+    component: SalaryReport,
+
+    exact: true,
+
+  },
+
+  {
+
+    path: "/Employee/attD",
+
+    name: "Employee Attendace Details",
+
+    component: AttendanceDetails,
+
+    exact: true,
+
+  },
+
+
+
+  {
+
+    path: "/Employee/view",
+
+    name: "View",
+
+    component: view,
+
+    exact: true,
+
+  },
+  
 ];
 
 
 export default routes;
 
 
-export default routes;
+
 
 
 
