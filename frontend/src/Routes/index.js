@@ -57,6 +57,7 @@ let routes = [
     path: "/Stock/add",
     name: "Add Stock",
     component: AddStock,
+
     exact: true,
   },
 
@@ -103,10 +104,59 @@ let routes = [
     path: "/Machine/list",
     name: "Machine",
     component: MachineList,
+
+    exact: true,
+  },
+
+   {
+    path: "/Stock/delete/:id",
+     name: "Delete Stock",
+     component: DeleteStock,
+     exact: true,
+   },
+  
+   {
+     path: "/Stock/edit/:id",
+     name: "Edit Stock",
+     component: EditStock,
+     exact: true,
+   },
+
+  {
+    path: "/DStock/StockExpense",
+    name: "DStock",
+    component: StockExpense,
     exact: true,
   },
 
   {
+    path: "/DStock/add",
+    name: "Add DStock",
+    component: AddDStock,
+    exact: true,
+  },
+  {
+
+    path: "/DStock/edit/:id",
+    name: "Edit Stock",
+    component: EditDStock,
+    exact: true,
+  },
+
+
+
+
+
+
+  {
+    path: "/Machine/list",
+    name: "Machine",
+    component: MachineList,
+    exact: true,
+  },
+
+  {
+
     path: "/Machine/add",
     name: "Add Machine",
     component: AddMachine,
@@ -207,5 +257,6 @@ let routes = [
 
 
 export default routes;
+
 
 
