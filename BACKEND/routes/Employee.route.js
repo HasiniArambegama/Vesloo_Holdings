@@ -15,7 +15,7 @@ router.route("/add").post((req, res)=>{
     const email = req.body. email;
     const address = req.body.address; 
     const accountNumber = req.body.accountNumber;
-    const empType = req.body.empType;
+    const empType = req.body.empType
 
      //create a object of model
     const newEmployee = new Employee({
@@ -96,7 +96,7 @@ router.route("/get/:id").get(async(req, res)=> {
     const emp = await Employee.findById(empId)
     .then((employees)=> {
         res.status(200).send({status: "Employee fetched", employees})
-    }).catch(()=> {
+    }).catch((err)=> {
         console.log(eer.message);
         res.status(500).send({status: "Error with get employee", error: err(message)})
     })
