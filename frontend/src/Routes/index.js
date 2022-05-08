@@ -43,7 +43,7 @@ let routes = [
     path: "/Stock/list",
     name: "Stock",
     component: StockList,
-
+  },
   {
     path: "/Supplier/list",
     name: "Supplier",
@@ -131,7 +131,7 @@ let routes = [
 
 
 
-
+{
     path: "/Supplier/add",
     name: "Add Supplier",
     component: AddSupplier,
