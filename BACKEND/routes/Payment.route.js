@@ -1,57 +1,52 @@
 
 const router = require("express").Router();
 const res = require("express/lib/response");
-let Supplier = require("../models/Supplier.model");
+let Payment = require("../models/Payment.model");
 
-//Insert supplier details
+//Insert payment details
 
-http://localhost:8070/Supplier/add
+http://localhost:8070/Payment/add
 
 router.route("/add").post((req, res)=>{
     //body
-    const supplierID = req.body.supplierID;
-    const modelID = req.body.modelID;
-    const Squantity = req.body.Squantity;
-    const Samount = req.body.Samount;
-    const Sdate = req.body. Sdate;
-    const CreditPeriod = req.body.CreditPeriod; 
+    const PsupplierID = req.body.PsupplierID;
+    const Pamount = req.body.Pamount;
+    const Pdate = req.body.Pdate;
 
      //create a object of model
-    const newSupplier = new Supplier({
-        supplierID,
-        modelID ,
-        Squantity,
-        Samount,
-        Sdate,
-        CreditPeriod
+    const newPayment = new Payment({
+        PsupplierID,
+        Pamount,
+        Pdate
+        
     })
 
     //pass the object to mongodb
-    newSupplier.save().then(()=>{
-        res.json("Supplier Added")
+    newPayment.save().then(()=>{
+        res.json("Payment Added")
     }).catch((err)=>{
         console.log(err);
     })
 
 })
 
-//display supplier details
+//display payment details
 
-http://localhost:8070/Supplier
+http://localhost:8070/Payment
 
 router.route("/").get((req, res)=>{
     //body
-    Supplier.find().then((suppliers)=>{
-        res.json(suppliers)
+    Payment.find().then((payments)=>{
+        res.json(payments) 
     }).catch((err)=> {
         console.log(err)
     })
 
 })
 
-//Update supplier details
+//Update payment details
 
-http://localhost:8070/Supplier/update/
+http://localhost:8070/Payement/update/
 
 router.route("/update").post(async(req, res)=>{
     if (req.body.id == null || req.body.id == undefined) {
@@ -61,33 +56,23 @@ router.route("/update").post(async(req, res)=>{
         return;
     }
 
-    const {supplierID, modelID,Squantity,Samount, Sdate,CreditPeriod} = req.body;
+    const {PsupplierID, Pamount, Pdate} = req.body;
     console.log(req.body);
     
-    Supplier.findOne({_id : req.body.id }, (err, foundBul) => {
+    Payment.findOne({_id : req.body.id }, (err, foundBul) => {
         if(err) return res.status(401).send(err);
 
         if(!foundBul) return res.status(404).send("Building not found");
 
-        if(supplierID){
+        if(PsupplierID){
             foundBul.supplierID = req.body.supplierID;
         }
-        if(modelID){
-            foundBul.modelID = req.body.modelID;
+        if(Pamount){
+            foundBul.Pamount = req.body.Pamount;
         }
-        if(Squantity){
-            foundBul.Squantity = req.body.Squantity;
+        if(Pdate){
+            foundBul.Pdate = req.body.Pdate;
         }
-        if(Samount){
-            foundBul.Samount = req.body.Samount;
-        }
-        if(Sdate){
-            foundBul.Sdate = req.body.Sdate;
-        }
-        if(CreditPeriod){
-            foundBul.supplierAmount = req.body.CreditPeriod;
-        }
-
         foundBul.save((err, savedBul) => {
             if(err) return res.status(401).send(err);
 
@@ -98,9 +83,9 @@ router.route("/update").post(async(req, res)=>{
     });
 })
 
- //Delete Supplier
+ //Delete Payment
  
- http://localhost:8070/Supplier
+ http://localhost:8070/Payment
  router.route("/delete/:id").delete(async(req, res)=> {
     console.log(req.params.id);
     
@@ -111,7 +96,7 @@ router.route("/update").post(async(req, res)=>{
         return;
     }
     
-    Supplier.findOneAndDelete({ _id: req.params.id })
+    Payment.findOneAndDelete({ _id: req.params.id })
     .then( result => {
 
         if (!result) {
@@ -133,7 +118,7 @@ router.route("/update").post(async(req, res)=>{
  router.route("/getOne/:id").get(async(req, res)=> {
    
     try {
-        const build = await Supplier.findOne({ _id: req.params.id });
+        const build = await Payment.findOne({ _id: req.params.id });
         return res.status(200).send({
             data: build
         })
@@ -148,8 +133,8 @@ router.route("/getByDate/:date").get(async(req, res)=> {
    
 
 
-    Expense.find({ expenseDate: req.params.date }).then((expense)=>{
-        res.json(expense)
+    Payment.find({ paymentDate: req.params.date }).then((payment)=>{
+        res.json(payment)
     }).catch((err)=> {
         console.log(err)
     })
@@ -157,15 +142,16 @@ router.route("/getByDate/:date").get(async(req, res)=> {
     
 })
 
- http://localhost:8070/Supplier
+
+ http://localhost:8070/Payment
 router.route("/get/:id").get(async(req, res)=> {
-    let supID = req.params.id;
-    const sup = await Supplier.findById(supID)
-    .then((suppliers)=> {
-        res.status(200).send({status: "Supplier fetched", suppliers})
+    let payID = req.params.id;
+    const pay = await Payment.findById(payID)
+    .then((payments)=> {
+        res.status(200).send({status: "Payment fetched", payments})
     }).catch(()=> {
         console.log(eer.message);
-        res.status(500).send({status: "Error with get supplier", error: err(message)})
+        res.status(500).send({status: "Error with get payment", error: err(message)})
     })
 })
 
