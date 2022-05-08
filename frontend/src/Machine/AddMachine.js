@@ -134,6 +134,10 @@ class AddProduct extends React.Component {
                             <FormInput 
                                 label={'Machine Date'}
                                 placeholder={'Enter machine date'}
+
+                                type="date"
+
+
                                 error={ errors.machineDate}
                                 name="machineDate"
                                 value={this.state.machineDate}
@@ -217,7 +221,11 @@ class AddProduct extends React.Component {
 }
 
 const AT_OPTIONS = [{ label : 'Select Department' ,value : "" } , 
+
+...['Sewing', 'Industrial', 'Cutting', 'Sampaling', 'Patten making', 'Merchandising', ].map( i => {
+
 ...['IT', 'Marketing', 'Managment', 'HR', 'Manufacturing'].map( i => {
+
     return{
         label :  i  ,
          value : i 

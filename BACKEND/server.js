@@ -33,11 +33,16 @@ connection.once('open', () => {
  
 const employeeRouter = require("./routes/Employee.route.js");
 
+
 const empattendanceRouter = require("./routes/EmpAttendance.route.js");
+
 
 const machineRouter = require("./routes/Machine.route.js");
 
 const supplierRouter = require("./routes/Supplier.route.js");
+
+
+const expenseRouter = require("./routes/Expense.route");
 
 const basicinformationRouter = require("./routes/BasicInformation.route.js");
 
@@ -54,11 +59,15 @@ app.use("/Machine", machineRouter);
 
 app.use("/Supplier", supplierRouter);
 
+
+app.use("/Expense", expenseRouter);
+
 app.use("/EmpAttendance", empattendanceRouter);
 
 app.use("/BasicInformation", basicinformationRouter);
 
 app.use("/EmpSalary", empsalaryRouter);
+
 
 
 

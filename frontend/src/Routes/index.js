@@ -5,6 +5,13 @@ import DeleteMachine from '../Machine/DeleteMachine';
 import EditMachine   from '../Machine/EditMachine';
 import AddEmployee from '../Employee/AddEmployee';
 import ManageEmployee from '../Employee/ManageEmployees';
+
+import AddExpense from '../Expense/AddExpense';
+import ExpenseList from '../Expense/ExpenseList';
+import DeleteExpense from '../Expense/DeleteExpense';
+import ExpenseReport from '../Expense/ExpenseReport';
+import  SelectDate from '../Expense/SelectDate';
+
 import AddStock from '../Stock/AddStock';
 import StockList from '../Stock/StockList';
 import AddDStock from '../Stock/AddDStock';
@@ -38,6 +45,12 @@ let routes = [
   },
 
 
+  {
+    path: "/Expense/add",
+    name: "Add Expense",
+    component: AddExpense,
+
+
 
   {
     path: "/Stock/list",
@@ -49,10 +62,23 @@ let routes = [
     name: "Supplier",
     component: SupplierList,
 
+
     exact: true,
   },
 
   {
+
+    path: "/Expense/list",
+    name: "Expense",
+    component: ExpenseList,
+    exact: true,
+  },
+  
+  {
+    path: "/Expense/report/:date",
+    name: "Expense Report",
+    component: ExpenseReport,
+
 
     path: "/Stock/add",
     name: "Add Stock",
@@ -79,10 +105,23 @@ let routes = [
     path: "/DStock/StockExpense",
     name: "DStock",
     component: StockExpense,
+
     exact: true,
   },
 
   {
+
+    path: "/Expense/selectDate",
+    name: "Expense Select Date",
+    component: SelectDate,
+    exact: true,
+  },
+
+  {
+    path: "/Expense/delete/:id",
+    name: "Delete Expense",
+    component: DeleteExpense,
+
     path: "/DStock/add",
     name: "Add DStock",
     component: AddDStock,
@@ -126,10 +165,12 @@ let routes = [
     path: "/DStock/StockExpense",
     name: "DStock",
     component: StockExpense,
+
     exact: true,
   },
 
   {
+
     path: "/DStock/add",
     name: "Add DStock",
     component: AddDStock,
@@ -149,6 +190,7 @@ let routes = [
 
 
   {
+
     path: "/Machine/list",
     name: "Machine",
     component: MachineList,
@@ -176,6 +218,7 @@ let routes = [
     component: EditMachine,
     exact: true,
   },
+
 
 
 
@@ -239,6 +282,7 @@ let routes = [
   },
 
 
+
   {
     path: "/Employee/add",
     name: "Add Employee",
@@ -257,6 +301,10 @@ let routes = [
 
 
 export default routes;
+
+
+export default routes;
+
 
 
 
