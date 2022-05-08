@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const res = require("express/lib/response");
+
 let Employee = require("../models/Employee");
+
+let Employee = require("../models/Employee.model");
+
 
 //Insert employee details
 
