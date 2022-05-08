@@ -9,12 +9,12 @@ const app = express();
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
-
+app.use(express.json())
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.urlencoded({ extended: false }));
 const URL = process.env.MONGODB_URL;
-
 mongoose.connect(URL, {
     //useCreateIndex: true,
     useNewUrlParser: true, 
@@ -33,9 +33,15 @@ connection.once('open', () => {
  
 const employeeRouter = require("./routes/Employee.route.js");
 
+const empattendanceRouter = require("./routes/EmpAttendance.route.js");
+
 const machineRouter = require("./routes/Machine.route.js");
 
 const supplierRouter = require("./routes/Supplier.route.js");
+
+const basicinformationRouter = require("./routes/BasicInformation.route.js");
+
+const empsalaryRouter = require("./routes/EmpSalary.route.js");
 
 
 //http://localhost:8070 -backend url
@@ -46,8 +52,14 @@ app.use("/Employee", employeeRouter);
 
 app.use("/Machine", machineRouter);
 
-
 app.use("/Supplier", supplierRouter);
+
+app.use("/EmpAttendance", empattendanceRouter);
+
+app.use("/BasicInformation", basicinformationRouter);
+
+app.use("/EmpSalary", empsalaryRouter);
+
 
 
  const stockRouter = require("./routes/Stock.route.js");

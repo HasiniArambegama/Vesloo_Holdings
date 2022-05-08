@@ -12,7 +12,11 @@ render(){  return (
           <div className="row" >
               <div className="col-12 shadow-sm rounded bg-white" >
                 <h6 className="text-header py-3 mb-0 font-weight-bold line-hight-1">Admin Dashboard<br></br>
+<<<<<<< HEAD
+                <span className="text-muted small">VESLOO HOLDINGS</span></h6>
+=======
                 <span className="text-muted small">Summery</span></h6>
+>>>>>>> master
               </div>
           </div>
           {/* <div className="row">
